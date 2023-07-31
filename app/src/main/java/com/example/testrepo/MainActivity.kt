@@ -10,6 +10,9 @@ class MainActivity : AppCompatActivity() {
         // first var
 
         //test login
+        var name = "Ali_moh17"
+        var age  =  19
+        var kkk = 99
 
     }
 }
