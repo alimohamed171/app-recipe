@@ -8,10 +8,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        //test login
-        var name = "Ali_moh17"
-        var age  =  19
-        var kkk = 99
+
 
     }
 }
