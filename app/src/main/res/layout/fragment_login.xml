@@ -22,6 +22,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
+        android:fontFamily="@font/bungee"
         android:text="Welcome \nBack"
         android:textColor="#986418"
         android:textSize="36sp"
@@ -70,6 +71,7 @@
                 android:drawableLeft="@drawable/baseline_lock_24"
                 android:drawableTint="#814848"
                 android:ems="10"
+
                 android:hint=" Password"
                 android:inputType="textPassword"
                 app:layout_constraintEnd_toEndOf="parent"
