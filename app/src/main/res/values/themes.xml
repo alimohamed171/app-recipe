@@ -6,4 +6,17 @@
     </style>
 
     <style name="Theme.TestRepo" parent="Base.Theme.TestRepo" />
+
+    <style name="Login_Card_view_Custom" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSizeTopLeft">48dp</item>
+        <item name="cornerSizeTopRight">48dp</item>
+<!--        <item name="cornerSizeBottomLeft">48dp</item>-->
+<!--        <item name="cornerSizeBottomRight">48dp</item>-->
+    </style>
+    <style name="Login_Card_view_Style" parent="Widget.MaterialComponents.CardView">
+        <item name="shapeAppearance"> @style/Login_Card_view_Custom</item>
+
+    </style>
+    
 </resources>
