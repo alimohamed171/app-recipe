@@ -100,6 +100,7 @@
                 android:backgroundTint="#814848"
                 android:text="SIGN IN"
                 android:textColor="#F39103"
+                android:textSize="19sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
