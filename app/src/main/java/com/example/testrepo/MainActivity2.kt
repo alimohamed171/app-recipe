@@ -2,9 +2,11 @@ package com.example.testrepo
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
 import androidx.navigation.NavController
@@ -36,6 +38,24 @@ class MainActivity2 : AppCompatActivity() {
             }
             true
         }
+
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            when(destination.id)
+            {
+                R.id.aboutFragment -> {
+                    toolbar.visibility = View.GONE
+                    bottomNav.visibility = View.GONE
+                }
+                R.id.detailFragment -> {
+                    toolbar.visibility = View.GONE
+                    bottomNav.visibility = View.GONE
+                }
+                else -> {
+                    toolbar.visibility = View.VISIBLE
+                    bottomNav.visibility = View.VISIBLE
+                }
+            }
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -47,12 +67,9 @@ class MainActivity2 : AppCompatActivity() {
         when(item.itemId)
         {
             R.id.about_menu -> navController.navigate(R.id.aboutFragment)
-            R.id.sign_out_about -> Toast.makeText(this, "You have Signed Out.", Toast.LENGTH_SHORT).show()
+            R.id.sign_out_about -> finish()
         }
         return super.onOptionsItemSelected(item)
     }
 
-    override fun onBackPressed() {
-        finishAffinity()
-    }
 }
