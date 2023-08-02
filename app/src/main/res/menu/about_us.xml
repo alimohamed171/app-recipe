@@ -1,11 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/Sign_Out_About"
-        android:title="Sign Out" />
+        android:id="@+id/about_menu"
+        android:icon="@drawable/baseline_info_24"
+        android:title="About US"
+        app:showAsAction="always" />
     <item
-        android:id="@+id/About_Menu"
-        android:title="About US" />
+        android:id="@+id/sign_out_about"
+        android:icon="@drawable/baseline_exit_to_app_24"
+        android:title="Sign Out"
+        app:showAsAction="always" />
 
 </menu>
