@@ -51,4 +51,8 @@ class MainActivity2 : AppCompatActivity() {
         }
         return super.onOptionsItemSelected(item)
     }
+
+    override fun onBackPressed() {
+        finishAffinity()
+    }
 }
