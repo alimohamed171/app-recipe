@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#371919"
+    android:background="#F2F2F2"
     tools:context=".LoginFragment">
 
     <!-- TODO: Update blank fragment layout -->
@@ -99,7 +99,7 @@
                 android:layout_marginEnd="16dp"
                 android:backgroundTint="#814848"
                 android:text="Log In"
-                android:textColor="#F39103"
+                android:textColor="#FFFFFF"
                 android:textSize="19sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
