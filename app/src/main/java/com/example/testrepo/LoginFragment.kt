@@ -30,7 +30,7 @@ class LoginFragment : Fragment() {
                 .navigate(R.id.action_loginFragment_to_registerFragment)
         }
 
-           btnlogin = view.findViewById(R.id.btnLogin)
+           btnlogin = view.findViewById(R.id.btnSignUP)
            btnlogin.setOnClickListener{
           val intent = Intent(activity,MainActivity2::class.java)
           startActivity(intent)
