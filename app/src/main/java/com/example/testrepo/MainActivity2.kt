@@ -16,19 +16,34 @@ import androidx.navigation.fragment.findNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity2 : AppCompatActivity() {
-    lateinit var navHostFragment: NavHostFragment
-    lateinit var navController: NavController
+    private val navHostFragment = supportFragmentManager.findFragmentById(R.id.in_app_nav_host) as NavHostFragment
+    private val navController = navHostFragment.navController
+    private val toolbar: Toolbar = findViewById(R.id.toolbar)
+    private val bottomNav: BottomNavigationView = findViewById(R.id.bottom_nav)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main2)
 
-        navHostFragment = supportFragmentManager.findFragmentById(R.id.in_app_nav_host) as NavHostFragment
-        navController = navHostFragment.navController
+        bottomNavOnItemSelectedListener()
+        barsVisibility()
+        setToolBar()
+    }
 
-        val toolbar: Toolbar = findViewById(R.id.toolbar)
-        setSupportActionBar(toolbar)
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.about_us, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
 
-        val bottomNav: BottomNavigationView = findViewById(R.id.bottom_nav)
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId)
+        {
+            R.id.about_menu -> navController.navigate(R.id.aboutFragment)
+            R.id.sign_out_about -> finish()
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+    private fun bottomNavOnItemSelectedListener() {
         bottomNav.setOnItemSelectedListener {
             when(it.itemId)
             {
@@ -38,7 +53,9 @@ class MainActivity2 : AppCompatActivity() {
             }
             true
         }
+    }
 
+    private fun barsVisibility() {
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when(destination.id)
             {
@@ -58,18 +75,7 @@ class MainActivity2 : AppCompatActivity() {
         }
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.about_us, menu)
-        return super.onCreateOptionsMenu(menu)
+    private fun setToolBar() {
+        setSupportActionBar(toolbar)
     }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when(item.itemId)
-        {
-            R.id.about_menu -> navController.navigate(R.id.aboutFragment)
-            R.id.sign_out_about -> finish()
-        }
-        return super.onOptionsItemSelected(item)
-    }
-
 }
