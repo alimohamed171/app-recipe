@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#404040"
-    tools:context=".LoginFragment">
+    tools:context=".user_data.login.LoginFragment">
 
     <!-- #F2A007 -->
     <!-- #F2C166 -->
@@ -81,10 +81,10 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/editTextPhone" />
+                app:layout_constraintTop_toBottomOf="@+id/edtPhone" />
 
             <EditText
-                android:id="@+id/editTextPhone"
+                android:id="@+id/edtPhone"
                 android:layout_width="0dp"
                 android:layout_height="60dp"
                 android:layout_marginStart="16dp"
