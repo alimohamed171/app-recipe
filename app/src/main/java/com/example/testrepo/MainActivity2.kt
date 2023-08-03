@@ -9,24 +9,42 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
+import com.example.testrepo.network.APIClient
+import com.example.testrepo.repo.MealRepository
+import com.example.testrepo.viewModel.MealViewModel
+import com.example.testrepo.viewModel.MealViewModelFactory
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity2 : AppCompatActivity() {
-    private val navHostFragment = supportFragmentManager.findFragmentById(R.id.in_app_nav_host) as NavHostFragment
-    private val navController = navHostFragment.navController
-    private val toolbar: Toolbar = findViewById(R.id.toolbar)
-    private val bottomNav: BottomNavigationView = findViewById(R.id.bottom_nav)
+    lateinit var navHostFragment: NavHostFragment
+    lateinit var navController: NavController
+    lateinit var toolbar: Toolbar
+    lateinit var bottomNav: BottomNavigationView
+    lateinit var viewModel: MealViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main2)
 
+        navHostFragment = supportFragmentManager.findFragmentById(R.id.in_app_nav_host) as NavHostFragment
+        navController = navHostFragment.navController
+        toolbar = findViewById(R.id.toolbar)
+        bottomNav = findViewById(R.id.bottom_nav)
+
         bottomNavOnItemSelectedListener()
         barsVisibility()
         setToolBar()
+
+        createMealViewModel()
+        viewModel.getMealsByFirstLetter('a')
+        viewModel.listOfMeals.observe(this){
+            Log.d("asd->", "onCreate: $it")
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -77,5 +95,11 @@ class MainActivity2 : AppCompatActivity() {
 
     private fun setToolBar() {
         setSupportActionBar(toolbar)
+    }
+
+    private fun createMealViewModel()
+    {
+        val mealViewModelFactory = MealViewModelFactory(MealRepository(APIClient))
+        viewModel = ViewModelProvider(this, mealViewModelFactory).get(MealViewModel::class.java)
     }
 }
