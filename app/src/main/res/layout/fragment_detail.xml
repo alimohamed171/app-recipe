@@ -34,4 +34,22 @@
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imgFood" />
+
+    <com.borjabravo.readmoretextview.ReadMoreTextView
+        android:id="@+id/textDetails"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="This is Expandable text this is a simple text, this is a testing text"
+        android:textSize="16sp"
+        app:colorClickableText="#039BE5"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textTitle"
+        app:trimCollapsedText="read more"
+        app:trimExpandedText="read less"
+        app:trimLength="1"
+        app:trimMode="trimModeLength" />
 </androidx.constraintlayout.widget.ConstraintLayout>

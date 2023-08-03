@@ -74,6 +74,5 @@ dependencies {
     implementation"com.airbnb.android:lottie:$lottieVersion"
 
     // Expandable TextView
-    def LatestVersion = "1.0.4"
-    implementation "io.github.glailton.expandabletextview:expandabletextview:$LatestVersion"
+    implementation 'com.borjabravo:readmoretextview:2.1.0'
 }
