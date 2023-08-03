@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/base_nave"
-    app:startDestination="@id/loginFragment">
+    app:startDestination="@id/splashFragment">
 
     <fragment
         android:id="@+id/loginFragment"
@@ -18,4 +18,9 @@
         android:id="@+id/registerFragment"
         android:name="com.example.testrepo.RegisterFragment"
         android:label="RegisterFragment" />
+    <fragment
+        android:id="@+id/splashFragment"
+        android:name="com.example.testrepo.SplashFragment"
+        android:label="fragment_splash"
+        tools:layout="@layout/fragment_splash" />
 </navigation>
