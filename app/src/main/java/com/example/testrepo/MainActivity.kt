@@ -3,27 +3,35 @@ package com.example.testrepo
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.widget.Button
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
+import androidx.navigation.NavController
+import androidx.navigation.fragment.NavHostFragment
 
 class MainActivity : AppCompatActivity() {
-    lateinit var btnlogin : Button
     private lateinit var fragmentManager: FragmentManager
     private lateinit var loginFragment: LoginFragment
-//    private lateinit var transaction: FragmentTransaction
+    lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-//       btnlogin = findViewById(R.id.btnLogin)
-//
-//        btnlogin.setOnClickListener{
-//            val intent = Intent(this,MainActivity2::class.java)
-//            startActivity(intent)
-//            }
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
+        navController = navHostFragment.navController
 
- 
+        Handler(Looper.getMainLooper()).postDelayed({
+            navController.navigate(R.id.loginFragment)
+        },5500)
     }
+
+    override fun onBackPressed() {
+        finishAffinity()
+    }
+
+
+
 }
