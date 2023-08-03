@@ -16,13 +16,18 @@ import androidx.navigation.fragment.findNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity2 : AppCompatActivity() {
-    private val navHostFragment = supportFragmentManager.findFragmentById(R.id.in_app_nav_host) as NavHostFragment
-    private val navController = navHostFragment.navController
-    private val toolbar: Toolbar = findViewById(R.id.toolbar)
-    private val bottomNav: BottomNavigationView = findViewById(R.id.bottom_nav)
+    lateinit var navHostFragment: NavHostFragment
+    lateinit var navController: NavController
+    lateinit var toolbar: Toolbar
+    lateinit var bottomNav: BottomNavigationView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main2)
+
+        navHostFragment = supportFragmentManager.findFragmentById(R.id.in_app_nav_host) as NavHostFragment
+        navController = navHostFragment.navController
+        toolbar = findViewById(R.id.toolbar)
+        bottomNav = findViewById(R.id.bottom_nav)
 
         bottomNavOnItemSelectedListener()
         barsVisibility()
