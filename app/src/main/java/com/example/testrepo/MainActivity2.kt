@@ -9,10 +9,16 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
+import com.example.testrepo.network.APIClient
+import com.example.testrepo.repo.MealRepository
+import com.example.testrepo.viewModel.MealViewModel
+import com.example.testrepo.viewModel.MealViewModelFactory
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity2 : AppCompatActivity() {
@@ -20,6 +26,7 @@ class MainActivity2 : AppCompatActivity() {
     lateinit var navController: NavController
     lateinit var toolbar: Toolbar
     lateinit var bottomNav: BottomNavigationView
+    lateinit var viewModel: MealViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main2)
@@ -32,6 +39,12 @@ class MainActivity2 : AppCompatActivity() {
         bottomNavOnItemSelectedListener()
         barsVisibility()
         setToolBar()
+
+        createMealViewModel()
+        viewModel.getMealsByFirstLetter('a')
+        viewModel.listOfMeals.observe(this){
+            Log.d("asd->", "onCreate: $it")
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -82,5 +95,11 @@ class MainActivity2 : AppCompatActivity() {
 
     private fun setToolBar() {
         setSupportActionBar(toolbar)
+    }
+
+    private fun createMealViewModel()
+    {
+        val mealViewModelFactory = MealViewModelFactory(MealRepository(APIClient))
+        viewModel = ViewModelProvider(this, mealViewModelFactory).get(MealViewModel::class.java)
     }
 }
