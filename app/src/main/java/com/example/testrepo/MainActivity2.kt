@@ -2,9 +2,11 @@ package com.example.testrepo
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
 import androidx.navigation.NavController
@@ -14,28 +16,17 @@ import androidx.navigation.fragment.findNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity2 : AppCompatActivity() {
-    lateinit var navHostFragment: NavHostFragment
-    lateinit var navController: NavController
+    private val navHostFragment = supportFragmentManager.findFragmentById(R.id.in_app_nav_host) as NavHostFragment
+    private val navController = navHostFragment.navController
+    private val toolbar: Toolbar = findViewById(R.id.toolbar)
+    private val bottomNav: BottomNavigationView = findViewById(R.id.bottom_nav)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main2)
 
-        navHostFragment = supportFragmentManager.findFragmentById(R.id.in_app_nav_host) as NavHostFragment
-        navController = navHostFragment.navController
-
-        val toolbar: Toolbar = findViewById(R.id.toolbar)
-        setSupportActionBar(toolbar)
-
-        val bottomNav: BottomNavigationView = findViewById(R.id.bottom_nav)
-        bottomNav.setOnItemSelectedListener {
-            when(it.itemId)
-            {
-                R.id.bottom_nav_home -> navController.navigate(R.id.homeFragment)
-                R.id.bottom_nav_favorites -> navController.navigate(R.id.favoriteFragment)
-                R.id.bottom_nav_search -> navController.navigate(R.id.searchFragment)
-            }
-            true
-        }
+        bottomNavOnItemSelectedListener()
+        barsVisibility()
+        setToolBar()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -47,12 +38,44 @@ class MainActivity2 : AppCompatActivity() {
         when(item.itemId)
         {
             R.id.about_menu -> navController.navigate(R.id.aboutFragment)
-            R.id.sign_out_about -> Toast.makeText(this, "You have Signed Out.", Toast.LENGTH_SHORT).show()
+            R.id.sign_out_about -> finish()
         }
         return super.onOptionsItemSelected(item)
     }
 
-    override fun onBackPressed() {
-        finishAffinity()
+    private fun bottomNavOnItemSelectedListener() {
+        bottomNav.setOnItemSelectedListener {
+            when(it.itemId)
+            {
+                R.id.bottom_nav_home -> navController.navigate(R.id.homeFragment)
+                R.id.bottom_nav_favorites -> navController.navigate(R.id.favoriteFragment)
+                R.id.bottom_nav_search -> navController.navigate(R.id.searchFragment)
+            }
+            true
+        }
+    }
+
+    private fun barsVisibility() {
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            when(destination.id)
+            {
+                R.id.aboutFragment -> {
+                    toolbar.visibility = View.GONE
+                    bottomNav.visibility = View.GONE
+                }
+                R.id.detailFragment -> {
+                    toolbar.visibility = View.GONE
+                    bottomNav.visibility = View.GONE
+                }
+                else -> {
+                    toolbar.visibility = View.VISIBLE
+                    bottomNav.visibility = View.VISIBLE
+                }
+            }
+        }
+    }
+
+    private fun setToolBar() {
+        setSupportActionBar(toolbar)
     }
 }
