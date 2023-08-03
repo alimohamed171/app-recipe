@@ -58,10 +58,10 @@ class RegisterFragment : Fragment() {
             val user = User(0,email,pass,phone)
             mUserViewModel.addUser(user)
             Toast.makeText(requireContext(),"Successfully sign up" , Toast.LENGTH_LONG).show()
-            findNavController().navigate(R.id.action_registerFragment_to_loginFragment)
+          //  findNavController().navigate(R.id.action_registerFragment_to_loginFragment)
 
-//            val intent = Intent(activity, MainActivity2::class.java)
-//            startActivity(intent)
+            val intent = Intent(activity, MainActivity2::class.java)
+            startActivity(intent)
 
         }else{
             Toast.makeText(requireContext(),"$email $pass $phone " , Toast.LENGTH_LONG).show()
