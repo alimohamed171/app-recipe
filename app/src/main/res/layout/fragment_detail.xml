@@ -52,4 +52,16 @@
         app:trimExpandedText="read less"
         app:trimLength="1"
         app:trimMode="trimModeLength" />
+
+    <CheckBox
+        android:id="@+id/checkBox_favourite"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="3dp"
+        android:button="@drawable/selector_favourite_item"
+        android:scaleX="1.5"
+        android:scaleY="1.5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
