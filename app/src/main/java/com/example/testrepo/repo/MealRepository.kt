@@ -1,6 +1,6 @@
 package com.example.testrepo.repo
 
-import com.example.testrepo.Meals
+import com.example.testrepo.model.Meals
 import com.example.testrepo.network.RemoteDataSource
 
 class MealRepository(val remoteDataSource: RemoteDataSource): Repository {

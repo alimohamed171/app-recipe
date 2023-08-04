@@ -1,6 +1,6 @@
 package com.example.testrepo.network
 
-import com.example.testrepo.Meals
+import com.example.testrepo.model.Meals
 
 interface RemoteDataSource {
     suspend fun getRandomMeal(): Meals

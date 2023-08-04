@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.testrepo.Meal
+import com.example.testrepo.model.Meal
 import com.example.testrepo.repo.Repository
 import kotlinx.coroutines.launch
 

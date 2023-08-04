@@ -1,4 +1,4 @@
-package com.example.testrepo
+package com.example.testrepo.model
 
 data class Meal(
     val dateModified: Any,

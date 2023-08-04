@@ -1,6 +1,6 @@
 package com.example.testrepo.network
 
-import com.example.testrepo.Meals
+import com.example.testrepo.model.Meals
 import retrofit2.http.GET
 import retrofit2.http.Query
 
