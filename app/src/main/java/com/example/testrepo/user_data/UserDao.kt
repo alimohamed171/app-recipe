@@ -13,6 +13,7 @@ interface UserDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun addUser(user: User)
 
-    @Query("SELECT * FROM user_data ")
-    fun readAllData(): LiveData<List<User>>
+    @Query("SELECT * FROM user_data WHERE email = :userMail AND password = :userPass  ")
+    suspend fun readAllData(userMail:String , userPass:String ): User
+
 }

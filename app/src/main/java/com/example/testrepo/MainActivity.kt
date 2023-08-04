@@ -21,14 +21,14 @@ class MainActivity : AppCompatActivity() {
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
         navController = navHostFragment.navController
 
-        Handler(Looper.getMainLooper()).postDelayed({
-            navController.navigate(R.id.loginFragment)
-        },10000)
+//        Handler(Looper.getMainLooper()).postDelayed({
+//            navController.navigate(R.id.loginFragment)
+//        },10000)
     }
 
-    override fun onBackPressed() {
-        finishAffinity()
-    }
+//    override fun onBackPressed() {
+//        finishAffinity()
+//    }
 
 
 

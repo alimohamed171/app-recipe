@@ -8,20 +8,29 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class UserViewModel(application: Application):AndroidViewModel(application ) {
+    lateinit var user: User
 
-    private val readALlData: LiveData<List<User>>
-    private val repository:UserRepository
+
+    private val repository: UserRepository
 
     init {
         val userDao = UserDatabase.getDatabase(application).userDao()
         repository = UserRepository(userDao)
-        readALlData = repository.readAllData
     }
 
     fun addUser(user:User){
         viewModelScope.launch(Dispatchers.IO){
             repository.addUser(user)
         }
+    }
+    fun getUser(userMail:String , userPass:String) {
+        viewModelScope.launch(Dispatchers.IO) {
+          user = repository.raedUser(userMail, userPass)
+        }
+    }
+
+    fun getUserInfo():User{
+        return user
     }
 
 

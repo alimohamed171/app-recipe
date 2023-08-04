@@ -11,7 +11,6 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
 import com.example.testrepo.MainActivity2
 import com.example.testrepo.R
 import com.example.testrepo.user_data.User
@@ -36,7 +35,7 @@ class RegisterFragment : Fragment() {
         mUserViewModel = ViewModelProvider(this)[UserViewModel::class.java]
         // initialize var
         btnSignUP = view.findViewById(R.id.btnSignUP)
-       EDTemail = view.findViewById(R.id.edtMail)
+        EDTemail = view.findViewById(R.id.edtMail)
         EDTpass = view.findViewById(R.id.edtPass)
         EDTphone = view.findViewById(R.id.edtPhone)
 
@@ -46,8 +45,11 @@ class RegisterFragment : Fragment() {
 
         btnSignUP.setOnClickListener{
 
-            insertDataToDataBase(email.toString(),pass.toString(),phone.toString())
 
+            insertDataToDataBase(email.toString(),pass.toString(),phone.toString())
+            EDTemail.text.clear()
+            EDTpass.text.clear()
+            EDTphone.text.clear()
         }
     }
 
