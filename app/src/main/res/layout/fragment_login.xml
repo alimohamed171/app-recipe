@@ -46,7 +46,7 @@
             android:layout_height="match_parent">
 
             <EditText
-                android:id="@+id/edtMail"
+                android:id="@+id/logMail"
                 android:layout_width="0dp"
                 android:layout_height="60dp"
                 android:layout_marginStart="16dp"
@@ -62,7 +62,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <EditText
-                android:id="@+id/edtPass"
+                android:id="@+id/logPass"
                 android:layout_width="0dp"
                 android:layout_height="60dp"
                 android:layout_marginStart="16dp"
@@ -76,7 +76,7 @@
                 android:inputType="textPassword"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/edtMail" />
+                app:layout_constraintTop_toBottomOf="@+id/logMail" />
 
             <TextView
                 android:id="@+id/textView2"
@@ -88,7 +88,7 @@
                 android:textColor="#986418"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/edtPass" />
+                app:layout_constraintTop_toBottomOf="@+id/logPass" />
 
             <Button
                 android:id="@+id/btnSignUP"
@@ -105,7 +105,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/edtPass"
+                app:layout_constraintTop_toBottomOf="@+id/logPass"
                 app:layout_constraintVertical_bias="0.185" />
 
             <LinearLayout
