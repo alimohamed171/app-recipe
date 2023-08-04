@@ -23,7 +23,7 @@ class MainActivity : AppCompatActivity() {
 
         Handler(Looper.getMainLooper()).postDelayed({
             navController.navigate(R.id.loginFragment)
-        },1000)
+        },10000)
     }
 
     override fun onBackPressed() {
