@@ -64,7 +64,7 @@ class RegisterFragment : Fragment() {
             startActivity(intent)
 
         }else{
-            Toast.makeText(requireContext(),"$email $pass $phone " , Toast.LENGTH_LONG).show()
+            //Toast.makeText(requireContext(),"$email $pass $phone " , Toast.LENGTH_LONG).show()
             Toast.makeText(requireContext(),"please insert all the data" , Toast.LENGTH_LONG).show()
         }
 
