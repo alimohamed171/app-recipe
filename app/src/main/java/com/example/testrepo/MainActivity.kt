@@ -1,15 +1,13 @@
 package com.example.testrepo
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.widget.Button
 import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentTransaction
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
+import com.example.testrepo.user_data.login.LoginFragment
 
 class MainActivity : AppCompatActivity() {
     private lateinit var fragmentManager: FragmentManager
@@ -25,7 +23,7 @@ class MainActivity : AppCompatActivity() {
 
         Handler(Looper.getMainLooper()).postDelayed({
             navController.navigate(R.id.loginFragment)
-        },5500)
+        },1000)
     }
 
     override fun onBackPressed() {
