@@ -32,7 +32,7 @@ class HomeFragment : Fragment() {
 
         val recyclerView = view.findViewById<RecyclerView>(R.id.homeRecyclerView)
 
-        gettingProductsViewModelReady()
+        gettingMealsViewModelReady()
 
         viewModel.getMealsByFirstLetter(('a'..'z').random())
         viewModel.listOfMeals.observe(viewLifecycleOwner) {
@@ -55,7 +55,7 @@ class HomeFragment : Fragment() {
         }
     }
 
-    private fun gettingProductsViewModelReady() {
+    private fun gettingMealsViewModelReady() {
         val mealsFactory = MealViewModelFactory(MealRepository(APIClient))
         viewModel = ViewModelProvider(this.requireActivity(), mealsFactory)[MealViewModel::class.java]
     }
