@@ -1,5 +1,7 @@
 package com.example.testrepo
 
+import android.content.Context
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -56,7 +58,10 @@ class MainActivity2 : AppCompatActivity() {
         when(item.itemId)
         {
             R.id.about_menu -> navController.navigate(R.id.aboutFragment)
-            R.id.sign_out_about -> finish()
+            R.id.sign_out_about -> {
+                SharedPrefs.signOut()
+                finish()
+            }
         }
         return super.onOptionsItemSelected(item)
     }
