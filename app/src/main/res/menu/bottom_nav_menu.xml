@@ -4,14 +4,14 @@
 
     <item
         android:id="@+id/bottom_nav_home"
-        android:icon="@drawable/baseline_home_24"
+        android:icon="@drawable/home_24"
         android:title="Home" />
     <item
         android:id="@+id/bottom_nav_search"
-        android:icon="@drawable/baseline_search_24"
+        android:icon="@drawable/search_24"
         android:title="Search" />
     <item
         android:id="@+id/bottom_nav_favorites"
-        android:icon="@drawable/empty_heart"
+        android:icon="@drawable/heart_24"
         android:title="Favorites" />
 </menu>
