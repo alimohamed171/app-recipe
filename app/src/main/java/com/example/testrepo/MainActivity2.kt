@@ -28,7 +28,6 @@ class MainActivity2 : AppCompatActivity() {
     lateinit var navController: NavController
     lateinit var toolbar: Toolbar
     lateinit var bottomNav: BottomNavigationView
-    lateinit var viewModel: MealViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main2)
@@ -41,12 +40,6 @@ class MainActivity2 : AppCompatActivity() {
         bottomNavOnItemSelectedListener()
         barsVisibility()
         setToolBar()
-
-        createMealViewModel()
-        viewModel.getMealsByFirstLetter('a')
-        viewModel.listOfMeals.observe(this){
-            Log.d("asd->", "onCreate: $it")
-        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -100,11 +93,5 @@ class MainActivity2 : AppCompatActivity() {
 
     private fun setToolBar() {
         setSupportActionBar(toolbar)
-    }
-
-    private fun createMealViewModel()
-    {
-        val mealViewModelFactory = MealViewModelFactory(MealRepository(APIClient))
-        viewModel = ViewModelProvider(this, mealViewModelFactory).get(MealViewModel::class.java)
     }
 }
