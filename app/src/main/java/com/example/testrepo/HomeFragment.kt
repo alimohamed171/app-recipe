@@ -5,9 +5,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.example.testrepo.network.APIClient
 import com.example.testrepo.repo.MealRepository
 import com.example.testrepo.viewModel.MealViewModel
@@ -29,11 +33,26 @@ class HomeFragment : Fragment() {
         val recyclerView = view.findViewById<RecyclerView>(R.id.homeRecyclerView)
 
         gettingProductsViewModelReady()
+
         viewModel.getMealsByFirstLetter(('a'..'z').random())
         viewModel.listOfMeals.observe(viewLifecycleOwner) {
             recyclerView.adapter = HomeAdapter(it, this.requireActivity())
         }
         recyclerView.layoutManager = LinearLayoutManager(this.requireActivity(), RecyclerView.HORIZONTAL, false)
+
+        viewModel.getRandomMeal()
+        viewModel.listOfMeals.observe(viewLifecycleOwner) {
+            val image: ImageView = view.findViewById(R.id.homeMainImg)
+            val text: TextView = view.findViewById(R.id.MainMealName)
+            Glide.with(this.requireActivity())
+                .load(it[0].strMealThumb)
+                .apply(
+                    RequestOptions()
+                        .placeholder(R.drawable.loadin_image)
+                        .error(R.drawable.broken_image))
+                .into(image)
+            text.text = it[0].strMeal
+        }
     }
 
     private fun gettingProductsViewModelReady() {
