@@ -42,5 +42,18 @@
         android:id="@+id/detailFragment"
         android:name="com.example.testrepo.DetailFragment"
         android:label="fragment_detail"
-        tools:layout="@layout/fragment_detail" />
+        tools:layout="@layout/fragment_detail" >
+        <argument
+            android:name="image"
+            app:argType="string" />
+        <argument
+            android:name="name"
+            app:argType="string" />
+        <argument
+            android:name="details"
+            app:argType="string" />
+        <argument
+            android:name="video"
+            app:argType="string" />
+    </fragment>
 </navigation>

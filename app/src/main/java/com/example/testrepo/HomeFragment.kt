@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -29,30 +30,40 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        val recyclerView = view.findViewById<RecyclerView>(R.id.homeRecyclerView)
-
         gettingMealsViewModelReady()
 
+        viewModel.getRandomMeal()
+        viewModel.listOfMeals.observe(viewLifecycleOwner) { meals ->
+            val image: ImageView = view.findViewById(R.id.homeMainImg)
+            val text: TextView = view.findViewById(R.id.MainMealName)
+            Glide.with(this.requireActivity())
+                .load(meals[0].strMealThumb)
+                .apply(
+                    RequestOptions()
+                        .placeholder(R.drawable.loadin_image)
+                        .error(R.drawable.broken_image))
+                .into(image)
+            text.text = meals[0].strMeal
+
+            image.setOnClickListener {
+                val action =
+                    HomeFragmentDirections.actionHomeFragmentToDetailFragment(
+                        meals[0].strMealThumb,
+                        meals[0].strMeal,
+                        meals[0].strInstructions,
+                        meals[0].strYoutube)
+                view.findNavController().navigate(action)
+            }
+        }
+
+        val recyclerView = view.findViewById<RecyclerView>(R.id.homeRecyclerView)
         viewModel.getMealsByFirstLetter(('a'..'z').random())
         viewModel.listOfMeals.observe(viewLifecycleOwner) {
             recyclerView.adapter = HomeAdapter(it, this.requireActivity())
         }
         recyclerView.layoutManager = LinearLayoutManager(this.requireActivity(), RecyclerView.HORIZONTAL, false)
 
-        viewModel.getRandomMeal()
-        viewModel.listOfMeals.observe(viewLifecycleOwner) {
-            val image: ImageView = view.findViewById(R.id.homeMainImg)
-            val text: TextView = view.findViewById(R.id.MainMealName)
-            Glide.with(this.requireActivity())
-                .load(it[0].strMealThumb)
-                .apply(
-                    RequestOptions()
-                        .placeholder(R.drawable.loadin_image)
-                        .error(R.drawable.broken_image))
-                .into(image)
-            text.text = it[0].strMeal
-        }
+
     }
 
     private fun gettingMealsViewModelReady() {
