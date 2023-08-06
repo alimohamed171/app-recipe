@@ -13,7 +13,6 @@ import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import com.example.testrepo.MainActivity2
 import com.example.testrepo.R
-import com.example.testrepo.SharedPrefs
 import com.example.testrepo.user_data.User
 import com.example.testrepo.user_data.UserViewModel
 
@@ -50,9 +49,8 @@ class RegisterFragment : Fragment() {
             phone = EDTphone.text.toString()
             if(inputCheck(email,pass,phone))
             {
-                if(validateEmail(email) && validatePassword(pass) && validatePhone(phone))
-                {
-//                    insertDataToDataBase(email,pass,phone)
+             //   if(validateEmail(email) && validatePassword(pass) && validatePhone(phone)) {
+                    insertDataToDataBase(email,pass,phone)
                     Toast.makeText(requireContext(),"Successfully Signed Up" , Toast.LENGTH_LONG).show()
 //                    SharedPrefs.signIn()
                     EDTemail.text.clear()
@@ -61,11 +59,9 @@ class RegisterFragment : Fragment() {
 
                     val intent = Intent(activity, MainActivity2::class.java)
                     startActivity(intent)
-                }
-                else
-                {
+              //  } else {
                     Toast.makeText(context, "One or More of Your Inputs is Invalid", Toast.LENGTH_SHORT).show()
-                }
+              //  }
 
             }else{
                 Toast.makeText(requireContext(),"please insert all the data" , Toast.LENGTH_LONG).show()
@@ -85,7 +81,7 @@ class RegisterFragment : Fragment() {
     private fun inputCheck(email: String, pass: String, phone: String): Boolean {
         return !(TextUtils.isEmpty(email) && TextUtils.isEmpty(pass) && TextUtils.isEmpty(phone)  )
     }
-
+/*
     private fun validateEmail(email: String): Boolean
     {
         val emailPattern = "[a-zA-Z0-9._-]+@[a-zA-Z0-9]+\\.[a-zA-Z]{2,}"
@@ -106,4 +102,6 @@ class RegisterFragment : Fragment() {
         val regex = Regex(phonePattern)
         return regex.matches(phone)
     }
+
+   */
 }

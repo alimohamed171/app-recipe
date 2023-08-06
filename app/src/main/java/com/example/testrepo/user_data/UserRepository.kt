@@ -8,9 +8,11 @@ class UserRepository(private val userDao: UserDao) {
     suspend fun addUser(user: User){
         userDao.addUser(user)
     }
-    suspend fun raedUser(userMail:String):String{
+    suspend fun getPassword(userMail:String):String{
        return userDao.readPassword(userMail)
     }
-
+    suspend fun getUser(userMail:String ):User?{
+        return userDao.readAllData(userMail)
+    }
 
 }
