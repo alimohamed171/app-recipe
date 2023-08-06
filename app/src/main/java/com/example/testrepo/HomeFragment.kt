@@ -62,7 +62,7 @@ class HomeFragment : Fragment() {
         val recyclerView = view.findViewById<RecyclerView>(R.id.homeRecyclerView)
         viewModel.getMealsByFirstLetter(('a'..'z').random())
         viewModel.listOfMeals.observe(viewLifecycleOwner) {
-            recyclerView.adapter = HomeAdapter(it, this.requireActivity())
+            recyclerView.adapter = HomeAdapter(it, this.requireActivity(), view)
         }
         recyclerView.layoutManager = LinearLayoutManager(this.requireActivity(), RecyclerView.HORIZONTAL, false)
 

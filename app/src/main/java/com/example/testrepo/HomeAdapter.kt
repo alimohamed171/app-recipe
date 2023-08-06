@@ -7,12 +7,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.testrepo.model.Meal
 
-class HomeAdapter (private val data: List<Meal>, private val context: Context): RecyclerView.Adapter<HomeAdapter.HomeViewHolder>() {
+class HomeAdapter (private val data: List<Meal>, private val context: Context, private val view: View): RecyclerView.Adapter<HomeAdapter.HomeViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeAdapter.HomeViewHolder {
         val row = LayoutInflater.from(parent.context).inflate(R.layout.home_single_row, parent, false)
         return HomeViewHolder(row)
@@ -29,6 +30,15 @@ class HomeAdapter (private val data: List<Meal>, private val context: Context): 
         holder.name.text = data[position].strMeal
         holder.category.text = data[position].strCategory
         holder.area.text = data[position].strArea
+        holder.itemView.setOnClickListener {
+            val action =
+                HomeFragmentDirections.actionHomeFragmentToDetailFragment(
+                    data[position].strMealThumb,
+                    data[position].strMeal,
+                    data[position].strInstructions,
+                    data[position].strYoutube)
+            view.findNavController().navigate(action)
+        }
     }
 
     override fun getItemCount(): Int {
