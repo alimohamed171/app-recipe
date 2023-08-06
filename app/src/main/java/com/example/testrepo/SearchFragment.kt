@@ -68,7 +68,7 @@ class SearchFragment : Fragment() {
         gettingMealsViewModelReady()
         val recyclerView = view.findViewById<RecyclerView>(R.id.searchRecyclerView)
         viewModel.getMealByName(query)
-        viewModel.listOfMeals.observe(viewLifecycleOwner) {
+        viewModel.resultMeals.observe(viewLifecycleOwner) {
             recyclerView.adapter = SearchAdapter(it, this.requireActivity(), view)
         }
         recyclerView.layoutManager = LinearLayoutManager(this.requireActivity(), RecyclerView.VERTICAL, false)
