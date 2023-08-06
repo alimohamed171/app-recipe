@@ -20,7 +20,7 @@ class MainActivity : AppCompatActivity() {
 
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
         navController = navHostFragment.navController
-
+        SharedPrefs.init(this)
 //        Handler(Looper.getMainLooper()).postDelayed({
 //            navController.navigate(R.id.loginFragment)
 //        },10000)

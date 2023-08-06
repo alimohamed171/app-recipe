@@ -1,5 +1,6 @@
 package com.example.testrepo
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -26,9 +27,16 @@ class SplashFragment : Fragment() {
 
         lifecycleScope.launch (Dispatchers.Main) {
             delay(1000)
-            Navigation.findNavController(view)
-                .navigate(R.id.loginFragment)
-
+            if(SharedPrefs.getCurrentUser() == -1)
+            {
+                Navigation.findNavController(view)
+                    .navigate(R.id.action_splashFragment_to_loginFragment)
+            }
+            else
+            {
+                val intent = Intent(activity, MainActivity2::class.java)
+                startActivity(intent)
+            }
         }
 
 
