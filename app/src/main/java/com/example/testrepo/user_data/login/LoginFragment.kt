@@ -34,7 +34,7 @@ class LoginFragment : Fragment() {
 
         val view =  inflater.inflate(R.layout.fragment_login, container, false)
 //        sign up
-        view.findViewById<TextView>(R.id.txtSignUP).setOnClickListener {
+        view.findViewById<Button>(R.id.txtSignUP).setOnClickListener {
             Navigation.findNavController(view)
                 .navigate(R.id.action_loginFragment_to_registerFragment)
         }
@@ -47,15 +47,17 @@ class LoginFragment : Fragment() {
         val email = EDTemail.text
         val pass = EDTpass.text
 
-//        mUserViewModel.getUser(email.toString(),pass.toString())
-//        user = mUserViewModel.getUserInfo()
-
-
         btnlogin = view.findViewById(R.id.btnSignUP)
         btnlogin.setOnClickListener{
-            val intent = Intent(activity, MainActivity2::class.java)
-            startActivity(intent)
-           // Toast.makeText(requireContext(),"{${user.email} , ${user.password} , ${user.id} }" , Toast.LENGTH_LONG).show()
+//            val intent = Intent(activity, MainActivity2::class.java)
+//            startActivity(intent)
+
+//            user = mUserViewModel.getUser(email.toString(),pass.toString())
+            mUserViewModel.getUser(email.toString())
+            var userPass: String = mUserViewModel.getUserInfo()
+//            user = mUserViewModel.getUserInfo()
+//            Toast.makeText(requireContext(),"{${user.email} , ${user.password} , ${user.id} }" , Toast.LENGTH_LONG).show()
+            Toast.makeText(requireContext(),"{${userPass} }" , Toast.LENGTH_LONG).show()
         }
 
 
