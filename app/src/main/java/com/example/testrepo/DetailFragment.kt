@@ -13,10 +13,9 @@ import com.bumptech.glide.request.RequestOptions
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
-import java.util.regex.Matcher
-import java.util.regex.Pattern
 
 class DetailFragment : Fragment() {
+    lateinit var videoid: String
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -27,8 +26,6 @@ class DetailFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        controlYouTubePlayer(view)
 
         val image: ImageView = view.findViewById(R.id.imgFood)
         val title: TextView = view.findViewById(R.id.textTitle)
@@ -45,6 +42,9 @@ class DetailFragment : Fragment() {
             .into(image)
         title.text = args.name
         details.text = args.details
+        videoid = args.video
+
+        controlYouTubePlayer(view, videoid)
     }
 
     private fun onCheckedFavouriteButton() {
@@ -56,27 +56,31 @@ class DetailFragment : Fragment() {
 //        )
     }
 
-    private fun controlYouTubePlayer(view: View) {
+    private fun controlYouTubePlayer(view: View, videoid: String) {
         // add YouTubePlayerView as a lifecycle observer of its parent
         val youTubePlayerView: YouTubePlayerView = view.findViewById(R.id.youtube_player_view)
         lifecycle.addObserver(youTubePlayerView)
 
         // open video by user
-        youTubePlayerView.addYouTubePlayerListener(YouTubePlayerListener())
+        youTubePlayerView.addYouTubePlayerListener(YouTubePlayerListener(videoid))
     }
 
-    class YouTubePlayerListener(): AbstractYouTubePlayerListener(){
+    class YouTubePlayerListener(val videoid: String): AbstractYouTubePlayerListener(){
+        val id = getYouTubeId(videoid)
         override fun onReady(youTubePlayer: YouTubePlayer) {
             super.onReady(youTubePlayer)
-            val videoId = "S0Q4gqBUs7c"
+            val videoId = id
             youTubePlayer.loadVideo(videoId, 0F)
         }
 
-        fun getYouTubeId (youTubeUrl: String): String {
-            val pattern = "https?://(?:[0-9A-Z-]+\\.)?(?:youtu\\.be/|youtube\\.com\\S*[^\\w\\-\\s])([\\w\\-]{11})(?=[^\\w\\-]|$)(?![?=&+%\\w]*(?:['\"][^<>]*>|</a>))[?=&+%\\w]*"
-            val compiledPattern: Pattern = Pattern.compile(pattern, Pattern.CASE_INSENSITIVE)
-            val matcher: Matcher = compiledPattern.matcher(youTubeUrl)
-            return matcher.group()
+        private fun getYouTubeId (youTubeUrl: String): String {
+            var id = ""
+            for (i in youTubeUrl.length - 1 downTo 0) {
+                if (youTubeUrl[i] == '=')
+                    break
+                id += youTubeUrl[i]
+            }
+            return id.reversed()
         }
     }
 }
