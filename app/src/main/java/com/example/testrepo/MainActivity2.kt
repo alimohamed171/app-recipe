@@ -39,12 +39,6 @@ class MainActivity2 : AppCompatActivity() {
         bottomNavOnItemSelectedListener()
         barsVisibility()
         setToolBar()
-
-        createMealViewModel()
-        viewModel.getMealsByFirstLetter('a')
-        viewModel.listOfMeals.observe(this){
-            Log.d("asd->", "onCreate: $it")
-        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
