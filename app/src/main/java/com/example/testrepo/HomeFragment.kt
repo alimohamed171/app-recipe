@@ -30,8 +30,10 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         gettingMealsViewModelReady()
 
+        // View main random meal
         viewModel.getRandomMeal()
         viewModel.listOfMeals.observe(viewLifecycleOwner) { meals ->
             val image: ImageView = view.findViewById(R.id.homeMainImg)
@@ -56,6 +58,7 @@ class HomeFragment : Fragment() {
             }
         }
 
+        // View home meals
         val recyclerView = view.findViewById<RecyclerView>(R.id.homeRecyclerView)
         viewModel.getMealsByFirstLetter(('a'..'z').random())
         viewModel.listOfMeals.observe(viewLifecycleOwner) {

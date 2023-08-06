@@ -15,7 +15,7 @@ import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.Abs
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
 
 class DetailFragment : Fragment() {
-    lateinit var videoid: String
+    private lateinit var youTubeVideoID: String
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -27,10 +27,13 @@ class DetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        showReachedArgs(view)
+    }
+
+    private fun showReachedArgs(view: View) {
         val image: ImageView = view.findViewById(R.id.imgFood)
         val title: TextView = view.findViewById(R.id.textTitle)
         val details: TextView = view.findViewById(R.id.textDetails)
-        val video: YouTubePlayerView = view.findViewById(R.id.youtube_player_view)
 
         val args: DetailFragmentArgs by navArgs()
         Glide.with(this.requireActivity())
@@ -42,35 +45,25 @@ class DetailFragment : Fragment() {
             .into(image)
         title.text = args.name
         details.text = args.details
-        videoid = args.video
 
-        controlYouTubePlayer(view, videoid)
+        youTubeVideoID = args.video
+        controlYouTubePlayer(view, youTubeVideoID)
     }
 
-    private fun onCheckedFavouriteButton() {
-//        checkBox.setOnCheckedChangeListener(checkBox, isChecked ->
-//        if (isChecked)
-//            TODO()
-//        else
-//            TODO()
-//        )
-    }
-
-    private fun controlYouTubePlayer(view: View, videoid: String) {
+    private fun controlYouTubePlayer(view: View, videoID: String) {
         // add YouTubePlayerView as a lifecycle observer of its parent
         val youTubePlayerView: YouTubePlayerView = view.findViewById(R.id.youtube_player_view)
         lifecycle.addObserver(youTubePlayerView)
 
         // open video by user
-        youTubePlayerView.addYouTubePlayerListener(YouTubePlayerListener(videoid))
+        youTubePlayerView.addYouTubePlayerListener(YouTubePlayerListener(videoID))
     }
 
-    class YouTubePlayerListener(val videoid: String): AbstractYouTubePlayerListener(){
-        val id = getYouTubeId(videoid)
+    class YouTubePlayerListener(videoID: String): AbstractYouTubePlayerListener(){
+        private val youTubeVideoID = getYouTubeId(videoID)
         override fun onReady(youTubePlayer: YouTubePlayer) {
             super.onReady(youTubePlayer)
-            val videoId = id
-            youTubePlayer.loadVideo(videoId, 0F)
+            youTubePlayer.loadVideo(youTubeVideoID, 0F)
         }
 
         private fun getYouTubeId (youTubeUrl: String): String {
@@ -82,5 +75,14 @@ class DetailFragment : Fragment() {
             }
             return id.reversed()
         }
+    }
+
+    private fun onCheckedFavouriteButton() {
+//        checkBox.setOnCheckedChangeListener(checkBox, isChecked ->
+//        if (isChecked)
+//            TODO()
+//        else
+//            TODO()
+//        )
     }
 }
