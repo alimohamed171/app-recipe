@@ -35,25 +35,25 @@ class HomeFragment : Fragment() {
 
         // View main random meal
         viewModel.getRandomMeal()
-        viewModel.listOfMeals.observe(viewLifecycleOwner) { meals ->
+        viewModel.randomMeal.observe(viewLifecycleOwner) { meal ->
             val image: ImageView = view.findViewById(R.id.homeMainImg)
             val text: TextView = view.findViewById(R.id.MainMealName)
             Glide.with(this.requireActivity())
-                .load(meals[0].strMealThumb)
+                .load(meal.strMealThumb)
                 .apply(
                     RequestOptions()
                         .placeholder(R.drawable.loadin_image)
                         .error(R.drawable.broken_image))
                 .into(image)
-            text.text = meals[0].strMeal
+            text.text = meal.strMeal
 
             image.setOnClickListener {
                 val action =
                     HomeFragmentDirections.actionHomeFragmentToDetailFragment(
-                        meals[0].strMealThumb,
-                        meals[0].strMeal,
-                        meals[0].strInstructions,
-                        meals[0].strYoutube)
+                        meal.strMealThumb,
+                        meal.strMeal,
+                        meal.strInstructions,
+                        meal.strYoutube)
                 view.findNavController().navigate(action)
             }
         }

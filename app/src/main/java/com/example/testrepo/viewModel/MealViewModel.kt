@@ -12,17 +12,23 @@ class MealViewModel(val mealRepository: Repository): ViewModel() {
     private val _listOfMeals =MutableLiveData<List<Meal>>()
     val listOfMeals:LiveData<List<Meal>> = _listOfMeals
 
+    private val _randomMeal = MutableLiveData<Meal>()
+    val randomMeal: LiveData<Meal> = _randomMeal
+
+    private val _resultMeals = MutableLiveData<List<Meal>>()
+    val resultMeals: LiveData<List<Meal>> = _resultMeals
+
     fun getRandomMeal()
     {
         viewModelScope.launch {
-            _listOfMeals.value = mealRepository.getRemoteRandomMeal().meals
+            _randomMeal.value = mealRepository.getRemoteRandomMeal().meals[0]
         }
     }
 
     fun getMealByName(name: String)
     {
         viewModelScope.launch {
-            _listOfMeals.value = mealRepository.getMealByName(name).meals
+            _resultMeals.value = mealRepository.getMealByName(name).meals
         }
     }
 
