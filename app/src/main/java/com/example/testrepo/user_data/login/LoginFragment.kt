@@ -74,9 +74,8 @@ class LoginFragment : Fragment() {
                         }
 
                     }else {
-                        errorDialogToRegister("Can't found this email please Sign up first",view)
-                        EDTemail.text.clear()
-                        EDTpass.text.clear()
+                        errorDialogToRegister(view)
+
                     }//end of if user null
 
                 }// end of launch
@@ -100,13 +99,16 @@ class LoginFragment : Fragment() {
         builder.setMessage(errorMessage)
         builder.create().show()
     }
-    private fun errorDialogToRegister(errorMessage:String, view: View) {
+    private fun errorDialogToRegister( view: View) {
         val builder = AlertDialog.Builder(requireContext())
-        builder.setPositiveButton("OK"){_,_->
+        builder.setPositiveButton("Sign up"){_,_->
             goToRegister(view)
+            EDTemail.text.clear()
+            EDTpass.text.clear()
         }
+        builder.setNegativeButton("stay"){_,_ -> }
         builder.setTitle("EROR")
-        builder.setMessage(errorMessage)
+        builder.setMessage("Can't found this email please Sign up first")
         builder.create().show()
 
     }
