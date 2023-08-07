@@ -22,6 +22,7 @@ import com.example.testrepo.repo.MealRepository
 import com.example.testrepo.viewModel.MealViewModel
 import com.example.testrepo.viewModel.MealViewModelFactory
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import java.lang.System.exit
 
 class MainActivity2 : AppCompatActivity() {
     lateinit var navHostFragment: NavHostFragment
@@ -53,7 +54,7 @@ class MainActivity2 : AppCompatActivity() {
             R.id.about_menu -> navController.navigate(R.id.aboutFragment)
             R.id.sign_out_about -> {
                 SharedPrefs.signOut()
-                finish()
+                finishAffinity()
             }
         }
         return super.onOptionsItemSelected(item)
