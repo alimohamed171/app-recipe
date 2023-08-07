@@ -14,13 +14,10 @@ import kotlinx.coroutines.withContext
 
 class UserViewModel(application: Application):AndroidViewModel(application ) {
     private val repository: UserRepository
-    private val _user = MutableLiveData<User>()
-    var user :LiveData<User> = _user
 
     init {
         val userDao = UserDatabase.getDatabase(application).userDao()
         repository = UserRepository(userDao)
-//        user = User(0, "0", "0", "0")
     }
 
     fun addUser(user:User){
@@ -28,6 +25,19 @@ class UserViewModel(application: Application):AndroidViewModel(application ) {
             repository.addUser(user)
         }
     }
+
+    suspend fun getUser(userMail:String):User? {
+        return withContext(Dispatchers.IO) {
+          repository.getUser(userMail)
+        }
+    }
+
+
+
+
+//    fun getUserInfo():String{
+//        return user
+//    }
 //    fun getUser(userMail:String){
 //        viewModelScope.launch(Dispatchers.Main) {
 ////           user = repository.raedUser(userMail, userPass)
@@ -36,22 +46,10 @@ class UserViewModel(application: Application):AndroidViewModel(application ) {
 //        }
 //        Log.d("asd->", "getUser: function scope")
 //      }
-
 //    fun getUser(userMail:String){
 //     viewModelScope.launch(Dispatchers.Main) {
 //         _user.postValue(repository.getUser(userMail))
 //        }
 //    }
-suspend fun getUser(userMail:String):User?{
-
-    return withContext(Dispatchers.IO){
-        repository.getUser(userMail)
-    }
-    }
-
-//    fun getUserInfo():String{
-//        return user
-//    }
-
 
 }

@@ -1,7 +1,5 @@
 package com.example.testrepo.user_data
 
-import androidx.lifecycle.LiveData
-
 class UserRepository(private val userDao: UserDao) {
 
 
