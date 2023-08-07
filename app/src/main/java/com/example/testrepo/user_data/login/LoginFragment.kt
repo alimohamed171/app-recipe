@@ -15,6 +15,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.Navigation
 import com.example.testrepo.MainActivity2
 import com.example.testrepo.R
+import com.example.testrepo.SharedPrefs
 import com.example.testrepo.user_data.User
 import com.example.testrepo.user_data.UserViewModel
 import kotlinx.coroutines.launch
@@ -40,13 +41,16 @@ class LoginFragment : Fragment() {
         btnlogin = view.findViewById(R.id.btnLogin)
         EDTemail = view.findViewById(R.id.logMail)
         EDTpass = view.findViewById(R.id.logPass)
+        //padding between text and icon
+        EDTemail.compoundDrawablePadding = 30
+        EDTpass.compoundDrawablePadding = 30
 
         mUserViewModel = ViewModelProvider(this)[UserViewModel::class.java]
 
 //        val test :User = User(0,"moh","11","11")
 //        mUserViewModel.addUser(test)
-//        val test1 :User = User(0,"ali","123","123")
-//        mUserViewModel.addUser(test1)
+        val test1 :User = User(0,"ali","123","123")
+        mUserViewModel.addUser(test1)
 //        val test2 :User = User(0,"sara","123","123")
 //        mUserViewModel.addUser(test2)
 
@@ -66,9 +70,10 @@ class LoginFragment : Fragment() {
                     val user : User? = mUserViewModel.getUser(email)
                     if (user != null){
                         if(pass == user.password){
-                            errorDialog("{${user.id} , ${user.email}, ${user.password} , ${user.phone} }")
-//                            val intent = Intent(activity, MainActivity2::class.java)
-//                            startActivity(intent)
+//                            errorDialog("{${user.id} , ${user.email}, ${user.password} , ${user.phone} }")
+                            SharedPrefs.signIn(user.id)
+                            val intent = Intent(activity, MainActivity2::class.java)
+                            startActivity(intent)
                         }else{
                             errorDialog("password Invalid")
                         }
@@ -95,7 +100,7 @@ class LoginFragment : Fragment() {
     private fun errorDialog(errorMessage:String) {
         val builder = AlertDialog.Builder(requireContext())
         builder.setPositiveButton("OK"){_,_->}
-        builder.setTitle("EROR")
+        builder.setTitle("ERROR")
         builder.setMessage(errorMessage)
         builder.create().show()
     }
@@ -107,7 +112,7 @@ class LoginFragment : Fragment() {
             EDTpass.text.clear()
         }
         builder.setNegativeButton("stay"){_,_ -> }
-        builder.setTitle("EROR")
+        builder.setTitle("ERROR")
         builder.setMessage("Can't found this email please Sign up first")
         builder.create().show()
 

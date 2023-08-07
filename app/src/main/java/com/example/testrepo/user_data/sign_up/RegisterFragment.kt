@@ -15,8 +15,10 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.example.testrepo.MainActivity2
 import com.example.testrepo.R
+import com.example.testrepo.SharedPrefs
 import com.example.testrepo.user_data.User
 import com.example.testrepo.user_data.UserViewModel
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 class RegisterFragment : Fragment() {
@@ -41,10 +43,18 @@ class RegisterFragment : Fragment() {
         EDTemail = view.findViewById(R.id.edtMail)
         EDTpass = view.findViewById(R.id.edtPass)
         EDTphone = view.findViewById(R.id.edtPhone)
+        //padding between text and icon
+        EDTemail.compoundDrawablePadding = 30
+        EDTpass.compoundDrawablePadding = 30
+        EDTphone.compoundDrawablePadding = 30
+
 
         var email: String
         var pass: String
         var phone: String
+        //val paddingInPixels: Int = resources.getDimensionPixelSize(R.dimen.padding_size)
+
+
 
         btnSignUP.setOnClickListener{
             email = EDTemail.text.toString()
@@ -57,32 +67,41 @@ class RegisterFragment : Fragment() {
                 errorDialog("Password field is empty please enter your Password")
             }else if(TextUtils.isEmpty(phone)){
                 errorDialog("Phone field is empty please enter your Phone")
+            } else if(!validateEmail(email)){
+                errorDialog("Email is nat valid ")
             }
-               // if(validateEmail(email) && validatePassword(pass) && validatePhone(phone)) {
+            else if(!validatePassword(pass)){
+                errorDialog("Password is nat valid ")
+            }else if (!validatePhone(phone)){
+                errorDialog("Phone is nat valid ")
+            } else {
                 lifecycleScope.launch {
                     // first get this user from database if exist
                     val user: User? = mUserViewModel.getUser(email)
                     if (user == null) {
                         val currentUser = User(0, email, pass, phone)
                         mUserViewModel.addUser(currentUser)
-                        Toast.makeText(requireContext(),"Successfully Signed Up" , Toast.LENGTH_LONG).show()
-//                        val intent = Intent(activity, MainActivity2::class.java)
-//                        startActivity(intent)
 
+                        delay(10)
+                        lifecycleScope.launch {
+                            val testID :User? = mUserViewModel.getUser(email)
+                            if (testID!=null){
+                               // Toast.makeText(requireContext(), "${testID.id}", Toast.LENGTH_LONG).show()
+                                SharedPrefs.signIn(testID.id)
+                                val intent = Intent(activity, MainActivity2::class.java)
+                                startActivity(intent)
+                            }else{
+                                errorDialog("error in SIGNUP")
+                            }
+                        }
                     } else {
                         errorDialog("This user email is already exist ")
                     }
                 }// end of launch
-
-//                    SharedPrefs.signIn()
+            }// end of else
                     EDTemail.text.clear()
                     EDTpass.text.clear()
                     EDTphone.text.clear()
-
-              //  } else {
-              //      Toast.makeText(context, "One or More of Your Inputs is Invalid", Toast.LENGTH_SHORT).show()
-              //  }
-
         }// end of button click
 
 
@@ -100,7 +119,7 @@ class RegisterFragment : Fragment() {
     private fun inputCheck(email: String, pass: String, phone: String): Boolean {
         return !(TextUtils.isEmpty(email) && TextUtils.isEmpty(pass) && TextUtils.isEmpty(phone)  )
     }
-/*
+
     private fun validateEmail(email: String): Boolean
     {
         val emailPattern = "[a-zA-Z0-9._-]+@[a-zA-Z0-9]+\\.[a-zA-Z]{2,}"
@@ -122,5 +141,5 @@ class RegisterFragment : Fragment() {
         return regex.matches(phone)
     }
 
-   */
+
 }

@@ -39,7 +39,6 @@ class SplashFragment : Fragment() {
             }
         }
 
-
         super.onViewCreated(view, savedInstanceState)
     }
 
