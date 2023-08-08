@@ -15,6 +15,8 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.testrepo.network.APIClient
 import com.example.testrepo.repo.MealRepository
+import com.example.testrepo.user_data.UserDatabase
+import com.example.testrepo.user_data.UserRepository
 import com.example.testrepo.viewModel.MealViewModel
 import com.example.testrepo.viewModel.MealViewModelFactory
 
@@ -53,7 +55,9 @@ class HomeFragment : Fragment() {
                         meal.strMealThumb,
                         meal.strMeal,
                         meal.strInstructions,
-                        meal.strYoutube)
+                        meal.strYoutube,
+                        meal.idMeal
+                    )
                 view.findNavController().navigate(action)
             }
         }
@@ -70,7 +74,10 @@ class HomeFragment : Fragment() {
     }
 
     private fun gettingMealsViewModelReady() {
-        val mealsFactory = MealViewModelFactory(MealRepository(APIClient))
+        val userDao = UserDatabase.getDatabase(requireContext()).userDao()
+        val mealDataDao = UserDatabase.getDatabase(requireContext()).mealDataDao()
+        val favoriteDao = UserDatabase.getDatabase(requireContext()).favoritesDao()
+        val mealsFactory = MealViewModelFactory(MealRepository(APIClient), UserRepository(userDao, favoriteDao, mealDataDao))
         viewModel = ViewModelProvider(this.requireActivity(), mealsFactory)[MealViewModel::class.java]
     }
 }

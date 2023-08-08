@@ -35,7 +35,9 @@ class SearchAdapter (private val data: List<Meal>, private val context: Context,
                     data[position].strMealThumb,
                     data[position].strMeal,
                     data[position].strInstructions,
-                    data[position].strYoutube)
+                    data[position].strYoutube,
+                    data[position].idMeal
+                )
             view.findNavController().navigate(action)
         }
     }

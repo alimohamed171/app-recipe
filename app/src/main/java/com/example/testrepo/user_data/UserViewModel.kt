@@ -17,7 +17,10 @@ class UserViewModel(application: Application):AndroidViewModel(application ) {
 
     init {
         val userDao = UserDatabase.getDatabase(application).userDao()
-        repository = UserRepository(userDao)
+        val mealDataDao = UserDatabase.getDatabase(application).mealDataDao()
+        val favoriteDao = UserDatabase.getDatabase(application).favoritesDao()
+
+        repository = UserRepository(userDao, favoriteDao, mealDataDao)
     }
 
     fun addUser(user:User){
