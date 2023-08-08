@@ -13,4 +13,7 @@ interface MealAPIService {
 
     @GET("api/json/v1/1/search.php")
     suspend fun searchByFirstLetter(@Query("f") letter: Char): Meals
+
+    @GET("api/json/v1/1/lookup.php")
+    suspend fun getMealById(@Query("i") mealId: String): Meals
 }

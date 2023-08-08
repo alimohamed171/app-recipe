@@ -16,4 +16,7 @@ class MealRepository(val remoteDataSource: RemoteDataSource): Repository {
         return remoteDataSource.searchByFirstLetter(letter)
     }
 
+    override suspend fun getMealById(mealId: String): Meals {
+        return remoteDataSource.getMealById(mealId)
+    }
 }

@@ -6,4 +6,5 @@ interface RemoteDataSource {
     suspend fun getRandomMeal(): Meals
     suspend fun searchByName(name: String): Meals
     suspend fun searchByFirstLetter(letter: Char): Meals
+    suspend fun getMealById(mealId: String): Meals
 }

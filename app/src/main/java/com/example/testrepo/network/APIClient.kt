@@ -14,4 +14,8 @@ object APIClient: RemoteDataSource {
     override suspend fun searchByFirstLetter(letter: Char): Meals {
         return BaseRetrofitHelper.retrofit.create(MealAPIService::class.java).searchByFirstLetter(letter)
     }
+
+    override suspend fun getMealById(mealId: String): Meals {
+        return BaseRetrofitHelper.retrofit.create(MealAPIService::class.java).getMealById(mealId)
+    }
 }
