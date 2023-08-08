@@ -2,6 +2,7 @@ package com.example.testrepo.user_data.login
 
 import android.app.AlertDialog
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.text.TextUtils
 import androidx.fragment.app.Fragment
@@ -18,6 +19,7 @@ import com.example.testrepo.R
 import com.example.testrepo.SharedPrefs
 import com.example.testrepo.user_data.User
 import com.example.testrepo.user_data.UserViewModel
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.launch
 
 class LoginFragment : Fragment() {
@@ -60,7 +62,8 @@ class LoginFragment : Fragment() {
             val pass = EDTpass.text.toString()
 
             if( TextUtils.isEmpty(email) ){
-                errorDialog("Email field is empty please enter your email")
+               // errorDialog("Email field is empty please enter your email")
+                errorSnackBar(view,"Email field is empty please enter your email")
             }else if(TextUtils.isEmpty(pass)){
                 errorDialog("Password field is empty please enter your Password")
             }
@@ -103,6 +106,10 @@ class LoginFragment : Fragment() {
         builder.setTitle("ERROR")
         builder.setMessage(errorMessage)
         builder.create().show()
+    }
+    private fun errorSnackBar(view: View,errorMessage:String) {
+        Snackbar.make(view,errorMessage,Snackbar.LENGTH_LONG).setTextColor(Color.parseColor("#ED0303"))
+        .show()
     }
     private fun errorDialogToRegister( view: View) {
         val builder = AlertDialog.Builder(requireContext())
