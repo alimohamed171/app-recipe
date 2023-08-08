@@ -63,5 +63,8 @@
         <argument
             android:name="video"
             app:argType="string" />
+        <argument
+            android:name="mealId"
+            app:argType="string" />
     </fragment>
 </navigation>

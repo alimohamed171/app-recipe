@@ -36,7 +36,9 @@ class HomeAdapter (private val data: List<Meal>, private val context: Context, p
                     data[position].strMealThumb,
                     data[position].strMeal,
                     data[position].strInstructions,
-                    data[position].strYoutube)
+                    data[position].strYoutube,
+                    data[position].idMeal
+                )
             view.findNavController().navigate(action)
         }
     }

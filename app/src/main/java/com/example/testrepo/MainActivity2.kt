@@ -1,6 +1,7 @@
 package com.example.testrepo
 
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -55,6 +56,8 @@ class MainActivity2 : AppCompatActivity() {
             R.id.sign_out_about -> {
                 SharedPrefs.signOut()
                 finishAffinity()
+                intent = Intent(this, MainActivity::class.java)
+                startActivity(intent)
             }
         }
         return super.onOptionsItemSelected(item)

@@ -5,9 +5,17 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.testrepo.model.Meal
+import com.example.testrepo.repo.MealRepository
 import com.example.testrepo.repo.Repository
+import com.example.testrepo.user_data.Favorite
+import com.example.testrepo.user_data.MealData
 import com.example.testrepo.user_data.UserRepository
+import kotlinx.coroutines.async
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.withContext
 
 class MealViewModel(val mealRepository: Repository, val userRepository: UserRepository): ViewModel() {
     private val _listOfMeals =MutableLiveData<List<Meal>>()
@@ -22,7 +30,7 @@ class MealViewModel(val mealRepository: Repository, val userRepository: UserRepo
     private val _favoriteMeals = MutableLiveData<List<Meal>>()
     val favoriteMeals: LiveData<List<Meal>> = _favoriteMeals
 
-    private var favorites: List<String> = listOf()
+    private var favorites: MutableList<String> = mutableListOf()
     fun getRandomMeal()
     {
         viewModelScope.launch {
@@ -59,13 +67,14 @@ class MealViewModel(val mealRepository: Repository, val userRepository: UserRepo
     }
     fun removeFromFavorites(mealId: String, userId: Int)
     {
+        favorites.remove(mealId)
         viewModelScope.launch {
             userRepository.removeFromFavorites(mealId, userId)
         }
     }
     fun getFavoriteMeals(userId: Int)
     {
-        var tempFavorites: List<String>
+        var tempFavorites: MutableList<String>
         viewModelScope.launch {
             tempFavorites = userRepository.getFavorites(userId)
             if(tempFavorites != favorites)
@@ -79,5 +88,14 @@ class MealViewModel(val mealRepository: Repository, val userRepository: UserRepo
                 _favoriteMeals.value = listOfMeals
             }
         }
+    }
+
+    fun isFavorite(mealId: String, userId: Int): Favorite
+    {
+        var favorite: Favorite
+        runBlocking {
+            favorite = userRepository.isFavorite(mealId, userId)
+        }
+        return favorite
     }
 }

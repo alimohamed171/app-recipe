@@ -4,18 +4,30 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.CheckBox
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.example.testrepo.network.APIClient
+import com.example.testrepo.repo.MealRepository
+import com.example.testrepo.user_data.UserDatabase
+import com.example.testrepo.user_data.UserRepository
+import com.example.testrepo.viewModel.MealViewModel
+import com.example.testrepo.viewModel.MealViewModelFactory
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
 
 class DetailFragment : Fragment() {
     private lateinit var youTubeVideoID: String
+    private val args: DetailFragmentArgs by navArgs()
+    private lateinit var checkBox: CheckBox
+    private var mealViewModel: MealViewModel? = null
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -28,6 +40,30 @@ class DetailFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         showReachedArgs(view)
+        checkBox = view.findViewById(R.id.checkBox_favourite)
+        if(mealViewModel == null)
+        {
+            val userDao = UserDatabase.getDatabase(this.requireContext()).userDao()
+            val mealDataDao = UserDatabase.getDatabase(this.requireContext()).mealDataDao()
+            val favoriteDao = UserDatabase.getDatabase(this.requireContext()).favoritesDao()
+            mealViewModel = ViewModelProvider(this, MealViewModelFactory(MealRepository(APIClient), UserRepository(userDao, favoriteDao, mealDataDao))).get(MealViewModel::class.java)
+        }
+
+        if(mealViewModel?.isFavorite(args.mealId, SharedPrefs.getCurrentUser()) != null)
+        {
+            checkBox.isChecked = true
+        }
+        checkBox.setOnCheckedChangeListener { _, isChecked ->
+            if(isChecked)
+            {
+                mealViewModel?.insertMeal(args.mealId, args.name)
+                mealViewModel?.addToFavorites(args.mealId, SharedPrefs.getCurrentUser())
+            }
+            else
+            {
+                showAlertDialog()
+            }
+        }
     }
 
     private fun showReachedArgs(view: View) {
@@ -35,7 +71,7 @@ class DetailFragment : Fragment() {
         val title: TextView = view.findViewById(R.id.textTitle)
         val details: TextView = view.findViewById(R.id.textDetails)
 
-        val args: DetailFragmentArgs by navArgs()
+
         Glide.with(this.requireActivity())
             .load(args.image)
             .apply(
@@ -77,12 +113,20 @@ class DetailFragment : Fragment() {
         }
     }
 
-    private fun onCheckedFavouriteButton() {
-//        checkBox.setOnCheckedChangeListener(checkBox, isChecked ->
-//        if (isChecked)
-//            TODO()
-//        else
-//            TODO()
-//        )
+    private fun showAlertDialog()
+    {
+        val alertDialog = AlertDialog.Builder(this.requireContext())
+            .setTitle("Alert")
+            .setMessage("Are You Sure You Want to Remove this Meal From Favorites?")
+            .setPositiveButton("Yes"){ dialog, which ->
+                mealViewModel?.removeFromFavorites(args.mealId, SharedPrefs.getCurrentUser())
+                dialog.dismiss()
+            }
+            .setNegativeButton("No"){ dialog, which ->
+                checkBox.isChecked = true
+                dialog.dismiss()
+            }
+            .create()
+        alertDialog.show()
     }
 }

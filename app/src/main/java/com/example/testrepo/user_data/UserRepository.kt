@@ -30,8 +30,13 @@ class UserRepository(private val userDao: UserDao, private val favoriteDao: Favo
         favoriteDao.removeFromFavorites(Favorite(mealId, userId))
     }
 
-    suspend fun getFavorites(userId: Int): List<String>
+    suspend fun getFavorites(userId: Int): MutableList<String>
     {
         return favoriteDao.getFavorites(userId)
+    }
+
+    suspend fun isFavorite(mealId: String, userId: Int): Favorite
+    {
+        return favoriteDao.isFavorite(mealId, userId)
     }
 }

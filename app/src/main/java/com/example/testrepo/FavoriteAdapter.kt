@@ -14,7 +14,7 @@ import com.example.testrepo.model.Meal
 
 class FavoriteAdapter(private val context: Context, private val view: View): RecyclerView.Adapter<FavoriteAdapter.FavoriteViewHolder>() {
 
-    private lateinit var data: List<Meal>
+    private var data: List<Meal> = listOf()
     class FavoriteViewHolder(val row: View): RecyclerView.ViewHolder(row)
     {
         val image: ImageView = row.findViewById(R.id.imgMain)
@@ -49,7 +49,9 @@ class FavoriteAdapter(private val context: Context, private val view: View): Rec
                     data[position].strMealThumb,
                     data[position].strMeal,
                     data[position].strInstructions,
-                    data[position].strYoutube)
+                    data[position].strYoutube,
+                    data[position].idMeal
+                )
             view.findNavController().navigate(action)
         }
     }
