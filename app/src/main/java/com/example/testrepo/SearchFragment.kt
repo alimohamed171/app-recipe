@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.SearchView
+import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.core.content.ContextCompat.getSystemService
 import androidx.lifecycle.ViewModelProvider
@@ -25,6 +26,7 @@ import com.example.testrepo.viewModel.MealViewModelFactory
 
 class SearchFragment : Fragment() {
     private lateinit var viewModel: MealViewModel
+    private lateinit var searchErrorText: TextView
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -35,6 +37,9 @@ class SearchFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        searchErrorText = view.findViewById(R.id.search_error_text)
+        searchErrorText.visibility = View.GONE
 
         val searchView: SearchView = view.findViewById(R.id.searchView)
         showSoftKeyboard(searchView)
@@ -75,7 +80,18 @@ class SearchFragment : Fragment() {
         val recyclerView = view.findViewById<RecyclerView>(R.id.searchRecyclerView)
         viewModel.getMealByName(query)
         viewModel.resultMeals.observe(viewLifecycleOwner) {
-            recyclerView.adapter = SearchAdapter(it, this.requireActivity(), view)
+            if(it != null)
+            {
+                recyclerView.adapter = SearchAdapter(it, this.requireActivity(), view)
+                searchErrorText.visibility = View.GONE
+                recyclerView.visibility = View.VISIBLE
+            }
+            else
+            {
+                view.findViewById<TextView>(R.id.search_error_text).setText("No Results Found.")
+                searchErrorText.visibility = View.VISIBLE
+                recyclerView.visibility = View.GONE
+            }
         }
         recyclerView.layoutManager = LinearLayoutManager(this.requireActivity(), RecyclerView.VERTICAL, false)
     }

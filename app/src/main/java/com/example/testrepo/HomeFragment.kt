@@ -64,12 +64,17 @@ class HomeFragment : Fragment() {
 
         // View home meals
         val recyclerView = view.findViewById<RecyclerView>(R.id.homeRecyclerView)
-        viewModel.getMealsByFirstLetter(('a'..'z').random())
+        var randomChar: Char
+        do {
+            randomChar = ('a'..'z').random()
+        }
+        while (randomChar == 'q' || randomChar == 'u' || randomChar == 'x' || randomChar == 'z')
+
+        viewModel.getMealsByFirstLetter(randomChar)
         viewModel.listOfMeals.observe(viewLifecycleOwner) {
             recyclerView.adapter = HomeAdapter(it, this.requireActivity(), view)
         }
         recyclerView.layoutManager = LinearLayoutManager(this.requireActivity(), RecyclerView.HORIZONTAL, false)
-
 
     }
 
