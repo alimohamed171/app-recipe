@@ -39,7 +39,7 @@ class HomeFragment : Fragment() {
         viewModel.getRandomMeal()
         viewModel.randomMeal.observe(viewLifecycleOwner) { meal ->
             val image: ImageView = view.findViewById(R.id.homeMainImg)
-            val text: TextView = view.findViewById(R.id.MainMealName)
+            val text: TextView = view.findViewById(R.id.txtName)
             Glide.with(this.requireActivity())
                 .load(meal.strMealThumb)
                 .apply(
