@@ -89,7 +89,7 @@
                 android:layout_height="27dp"
                 android:layout_marginStart="16dp"
                 android:layout_toEndOf="@+id/imgMain"
-                android:src="@drawable/ic_launcher_foreground"
+                android:src="@drawable/cutlery"
                 app:layout_constraintBottom_toBottomOf="@+id/textCategory"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/textCategory"
