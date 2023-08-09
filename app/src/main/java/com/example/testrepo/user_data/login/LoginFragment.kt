@@ -65,7 +65,7 @@ class LoginFragment : Fragment() {
                // errorDialog("Email field is empty please enter your email")
                 errorSnackBar(view,"Email field is empty please enter your email")
             }else if(TextUtils.isEmpty(pass)){
-                errorDialog("Password field is empty please enter your Password")
+                errorSnackBar(view,"Password field is empty please enter your Password")
             }
             // check here for regex
             else{
@@ -78,7 +78,7 @@ class LoginFragment : Fragment() {
                             val intent = Intent(activity, MainActivity2::class.java)
                             startActivity(intent)
                         }else{
-                            errorDialog("password Invalid")
+                            errorSnackBar(view,"password Invalid")
                         }
 
                     }else {
@@ -108,7 +108,7 @@ class LoginFragment : Fragment() {
         builder.create().show()
     }
     private fun errorSnackBar(view: View,errorMessage:String) {
-        Snackbar.make(view,errorMessage,Snackbar.LENGTH_LONG).setTextColor(Color.parseColor("#ED0303"))
+        Snackbar.make(view,errorMessage,Snackbar.LENGTH_LONG)
         .show()
     }
     private fun errorDialogToRegister( view: View) {

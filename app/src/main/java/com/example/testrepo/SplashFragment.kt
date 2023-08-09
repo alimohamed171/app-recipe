@@ -26,7 +26,7 @@ class SplashFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
         lifecycleScope.launch (Dispatchers.Main) {
-            delay(1000)
+            delay(5000)
             if(SharedPrefs.getCurrentUser() == -1)
             {
                 Navigation.findNavController(view)

@@ -18,6 +18,7 @@ import com.example.testrepo.R
 import com.example.testrepo.SharedPrefs
 import com.example.testrepo.user_data.User
 import com.example.testrepo.user_data.UserViewModel
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -62,18 +63,18 @@ class RegisterFragment : Fragment() {
             phone = EDTphone.text.toString()
 
             if( TextUtils.isEmpty(email) ){
-                errorDialog("Email field is empty please enter your email")
+                errorSnackBar(view,"Email field is empty please enter your email")
             }else if(TextUtils.isEmpty(pass)){
-                errorDialog("Password field is empty please enter your Password")
+                errorSnackBar(view,"Password field is empty please enter your Password")
             }else if(TextUtils.isEmpty(phone)){
-                errorDialog("Phone field is empty please enter your Phone")
+                errorSnackBar(view,"Phone field is empty please enter your Phone")
             } else if(!validateEmail(email)){
-                errorDialog("Email is nat valid ")
+                errorSnackBar(view,"Email is nat valid ")
             }
             else if(!validatePassword(pass)){
-                errorDialog("Password is nat valid ")
+                errorSnackBar(view,"Password is nat valid ")
             }else if (!validatePhone(phone)){
-                errorDialog("Phone is nat valid ")
+                errorSnackBar(view,"Phone is nat valid ")
             } else {
                 lifecycleScope.launch {
                     // first get this user from database if exist
@@ -91,7 +92,7 @@ class RegisterFragment : Fragment() {
                                 val intent = Intent(activity, MainActivity2::class.java)
                                 startActivity(intent)
                             }else{
-                                errorDialog("error in SIGNUP")
+                                errorSnackBar(view,"error in SIGNUP")
                             }
                         }
                     } else {
@@ -115,9 +116,9 @@ class RegisterFragment : Fragment() {
         builder.setMessage(errorMessage)
         builder.create().show()
     }
-
-    private fun inputCheck(email: String, pass: String, phone: String): Boolean {
-        return !(TextUtils.isEmpty(email) && TextUtils.isEmpty(pass) && TextUtils.isEmpty(phone)  )
+    private fun errorSnackBar(view: View,errorMessage:String) {
+        Snackbar.make(view,errorMessage, Snackbar.LENGTH_LONG)
+            .show()
     }
 
     private fun validateEmail(email: String): Boolean
