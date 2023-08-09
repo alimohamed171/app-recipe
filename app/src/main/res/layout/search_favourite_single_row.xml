@@ -65,7 +65,7 @@
                 app:layout_constraintBottom_toTopOf="@+id/textArea"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toEndOf="@+id/iconCategory"
+                app:layout_constraintStart_toEndOf="@+id/categoryIcon"
                 app:layout_constraintTop_toBottomOf="@+id/textName" />
 
             <TextView
@@ -82,22 +82,22 @@
                 android:textSize="19sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/iconArea" />
+                app:layout_constraintStart_toEndOf="@+id/areaIcon" />
 
             <ImageView
-                android:id="@+id/iconCategory"
+                android:id="@+id/categoryIcon"
                 android:layout_width="31dp"
                 android:layout_height="27dp"
                 android:layout_marginStart="16dp"
                 android:layout_toEndOf="@+id/imgMain"
-                android:src="@drawable/ic_launcher_foreground"
+                android:src="@drawable/cutlery"
                 app:layout_constraintBottom_toBottomOf="@+id/textCategory"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/textCategory"
                 app:layout_constraintVertical_bias="0.0" />
 
             <ImageView
-                android:id="@+id/iconArea"
+                android:id="@+id/areaIcon"
                 android:layout_width="31dp"
                 android:layout_height="27dp"
                 android:layout_below="@+id/textName"
