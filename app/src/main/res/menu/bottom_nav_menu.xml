@@ -3,15 +3,15 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/bottom_nav_home"
+        android:id="@+id/homeFragment"
         android:icon="@drawable/home_icon_selector"
         android:title="Home" />
     <item
-        android:id="@+id/bottom_nav_search"
+        android:id="@+id/searchFragment"
         android:icon="@drawable/search_icon_selector"
         android:title="Search" />
     <item
-        android:id="@+id/bottom_nav_favorites"
+        android:id="@+id/favoriteFragment"
         android:icon="@drawable/favorite_icon_selector"
         android:title="Favorites" />
 </menu>

@@ -1,29 +1,16 @@
 package com.example.testrepo
 
-import android.content.Context
 import android.content.Intent
-import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
-import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
-import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.fragment.findNavController
-import com.example.testrepo.network.APIClient
-import com.example.testrepo.repo.MealRepository
-import com.example.testrepo.viewModel.MealViewModel
-import com.example.testrepo.viewModel.MealViewModelFactory
+import androidx.navigation.ui.NavigationUI
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import java.lang.System.exit
 
 class MainActivity2 : AppCompatActivity() {
     lateinit var navHostFragment: NavHostFragment
@@ -39,9 +26,11 @@ class MainActivity2 : AppCompatActivity() {
         toolbar = findViewById(R.id.toolbar)
         bottomNav = findViewById(R.id.bottom_nav)
 
-        bottomNavOnItemSelectedListener()
-        barsVisibility()
+        NavigationUI.setupActionBarWithNavController(this, navController)
+        NavigationUI.setupWithNavController(bottomNav, navController)
+
         setToolBar()
+        barsVisibility()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -63,18 +52,6 @@ class MainActivity2 : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 
-    private fun bottomNavOnItemSelectedListener() {
-        bottomNav.setOnItemSelectedListener {
-            when(it.itemId)
-            {
-                R.id.bottom_nav_home -> navController.navigate(R.id.homeFragment)
-                R.id.bottom_nav_favorites -> navController.navigate(R.id.favoriteFragment)
-                R.id.bottom_nav_search -> navController.navigate(R.id.searchFragment)
-            }
-            true
-        }
-    }
-
     private fun barsVisibility() {
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when(destination.id)
@@ -87,10 +64,22 @@ class MainActivity2 : AppCompatActivity() {
                     toolbar.visibility = View.GONE
                     bottomNav.visibility = View.GONE
                 }
-                else -> {
+                R.id.homeFragment -> {
+                    supportActionBar?.title = "Home"
                     toolbar.visibility = View.VISIBLE
                     bottomNav.visibility = View.VISIBLE
                 }
+                R.id.favoriteFragment -> {
+                    supportActionBar?.title = "Favorites"
+                    toolbar.visibility = View.VISIBLE
+                    bottomNav.visibility = View.VISIBLE
+                }
+                R.id.searchFragment -> {
+                    supportActionBar?.title = "Search"
+                    toolbar.visibility = View.VISIBLE
+                    bottomNav.visibility = View.VISIBLE
+                }
+
             }
         }
     }
