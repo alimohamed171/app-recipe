@@ -4,6 +4,7 @@ import android.app.AlertDialog
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
+import android.os.Message
 import android.text.TextUtils
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -11,6 +12,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.Navigation
@@ -20,6 +22,7 @@ import com.example.testrepo.SharedPrefs
 import com.example.testrepo.user_data.User
 import com.example.testrepo.user_data.UserViewModel
 import com.google.android.material.snackbar.Snackbar
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 class LoginFragment : Fragment() {
@@ -39,6 +42,9 @@ class LoginFragment : Fragment() {
         view.findViewById<Button>(R.id.txtSignUP).setOnClickListener {
             goToRegister(view)
         }
+ view.findViewById<TextView>(R.id.forgotPass).setOnClickListener {
+          errorDialog("Forgot Password","we here in recipe app not facebook wait until we add this feature or go and make a new account")
+        }
 
         btnlogin = view.findViewById(R.id.btnLogin)
         EDTemail = view.findViewById(R.id.logMail)
@@ -51,8 +57,8 @@ class LoginFragment : Fragment() {
 
 //        val test :User = User(0,"moh","11","11")
 //        mUserViewModel.addUser(test)
-        val test1 :User = User(0,"ali","123","123")
-        mUserViewModel.addUser(test1)
+//        val test1 :User = User(0,"ali","123","123")
+//        mUserViewModel.addUser(test1)
 //        val test2 :User = User(0,"sara","123","123")
 //        mUserViewModel.addUser(test2)
 
@@ -63,9 +69,9 @@ class LoginFragment : Fragment() {
 
             if( TextUtils.isEmpty(email) ){
                // errorDialog("Email field is empty please enter your email")
-                errorSnackBar(view,"Email field is empty please enter your email")
+                errorSnackBar(view,"Email field is empty please enter your email",pass)
             }else if(TextUtils.isEmpty(pass)){
-                errorSnackBar(view,"Password field is empty please enter your Password")
+                errorSnackBar(view,"Password field is empty please enter your Password",pass)
             }
             // check here for regex
             else{
@@ -78,7 +84,8 @@ class LoginFragment : Fragment() {
                             val intent = Intent(activity, MainActivity2::class.java)
                             startActivity(intent)
                         }else{
-                            errorSnackBar(view,"password Invalid")
+                            errorSnackBar(view,"password Invalid",user.password)
+
                         }
 
                     }else {
@@ -100,15 +107,18 @@ class LoginFragment : Fragment() {
             .navigate(R.id.action_loginFragment_to_registerFragment)
     }
 
-    private fun errorDialog(errorMessage:String) {
+    private fun errorDialog(title:String,message: String) {
         val builder = AlertDialog.Builder(requireContext())
-        builder.setPositiveButton("OK"){_,_->}
-        builder.setTitle("ERROR")
-        builder.setMessage(errorMessage)
+        builder.setPositiveButton("OK") { _, _ -> }
+        builder.setTitle(title)
+        builder.setMessage(message)
         builder.create().show()
     }
-    private fun errorSnackBar(view: View,errorMessage:String) {
+    private fun errorSnackBar(view: View,errorMessage:String,pass:String) {
         Snackbar.make(view,errorMessage,Snackbar.LENGTH_LONG)
+            .setAction("OK"){
+                errorDialog("password","your password is \" $pass \" \nBe honest don't use it to find out users' passwords ")
+            }
         .show()
     }
     private fun errorDialogToRegister( view: View) {

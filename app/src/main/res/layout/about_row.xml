@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+    android:layout_width="match_parent"
+    android:layout_height="330dp">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/about_cardView"
+        android:layout_width="match_parent"
+        android:layout_height="330dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/About_imgMain"
+                android:layout_width="220dp"
+                android:layout_height="220dp"
+                android:contentDescription="Team Image"
+                android:padding="5dp"
+                android:src="@drawable/app_menu_icon"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:shapeAppearanceOverlay="@style/corner" />
+
+            <TextView
+                android:id="@+id/memberName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="16dp"
+                android:layout_toEndOf="@id/About_imgMain"
+                android:text="ALi Mohamed"
+                android:textAlignment="center"
+                android:textAllCaps="false"
+                android:textIsSelectable="false"
+                android:textSize="19sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/About_imgMain" />
+
+            <TextView
+                android:id="@+id/linkedin"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/memberName"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="17dp"
+                android:layout_marginBottom="16dp"
+                android:layout_toEndOf="@id/About_imgMain"
+                android:text="linkedin account"
+                android:textSize="19sp"
+                app:layout_constraintBottom_toTopOf="@+id/github"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toEndOf="@+id/iconLinkedin"
+                app:layout_constraintTop_toBottomOf="@+id/memberName" />
+
+            <TextView
+                android:id="@+id/github"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/linkedin"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="16dp"
+                android:layout_toEndOf="@id/About_imgMain"
+                android:text="github account"
+                android:textSize="19sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/iconGithub" />
+
+            <ImageView
+                android:id="@+id/iconLinkedin"
+                android:layout_width="31dp"
+                android:layout_height="27dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginBottom="8dp"
+                android:layout_toEndOf="@+id/About_imgMain"
+                android:src="@drawable/linkedin"
+                app:layout_constraintBottom_toBottomOf="@+id/linkedin"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/linkedin"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <ImageView
+                android:id="@+id/iconGithub"
+                android:layout_width="31dp"
+                android:layout_height="27dp"
+                android:layout_below="@+id/memberName"
+                android:layout_alignBottom="@+id/linkedin"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="4dp"
+                android:layout_toStartOf="@+id/linkedin"
+                android:layout_toEndOf="@+id/About_imgMain"
+                android:src="@drawable/github"
+                app:layout_constraintBottom_toBottomOf="@+id/github"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/github" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
