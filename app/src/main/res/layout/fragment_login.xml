@@ -34,7 +34,7 @@
         style="@style/Login_Card_view_Style"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:backgroundTint="#FFFFFF"
+        android:backgroundTint="#CCFFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -52,7 +52,7 @@
                 android:layout_marginTop="32dp"
                 android:layout_marginEnd="16dp"
                 android:drawableLeft="@drawable/baseline_email_24"
-                android:drawableTint="#814848"
+                android:drawableTint="#000000"
                 android:ems="10"
                 android:hint=" Email"
                 android:inputType="text"
@@ -68,7 +68,7 @@
                 android:layout_marginTop="32dp"
                 android:layout_marginEnd="16dp"
                 android:drawableLeft="@drawable/baseline_lock_24"
-                android:drawableTint="#814848"
+                android:drawableTint="#000000"
                 android:ems="10"
 
                 android:hint=" Password"
@@ -78,13 +78,13 @@
                 app:layout_constraintTop_toBottomOf="@+id/logMail" />
 
             <TextView
-                android:id="@+id/textView2"
+                android:id="@+id/forgotPass"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="12dp"
                 android:text="Forgot password?"
-                android:textColor="#986418"
+                android:textColor="#000000"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/logPass" />
@@ -103,7 +103,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView2" />
+                app:layout_constraintTop_toBottomOf="@+id/forgotPass" />
 
             <Button
                 android:id="@+id/txtSignUP"
