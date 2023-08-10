@@ -26,10 +26,10 @@ class MainActivity2 : AppCompatActivity() {
         toolbar = findViewById(R.id.toolbar)
         bottomNav = findViewById(R.id.bottom_nav)
 
+        setToolBar()
         NavigationUI.setupActionBarWithNavController(this, navController)
         NavigationUI.setupWithNavController(bottomNav, navController)
 
-        setToolBar()
         barsVisibility()
     }
 
