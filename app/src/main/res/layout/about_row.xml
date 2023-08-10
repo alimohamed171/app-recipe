@@ -3,12 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
 
     android:layout_width="match_parent"
-    android:layout_height="330dp">
+    android:layout_height="400dp">
+
 
     <androidx.cardview.widget.CardView
         android:id="@+id/about_cardView"
         android:layout_width="match_parent"
-        android:layout_height="330dp"
+        android:layout_height="400dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -20,15 +21,16 @@
 
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/About_imgMain"
-                android:layout_width="220dp"
+                android:layout_width="wrap_content"
                 android:layout_height="220dp"
                 android:contentDescription="Team Image"
                 android:padding="5dp"
-                android:src="@drawable/app_menu_icon"
+                android:src="@drawable/chef"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:shapeAppearanceOverlay="@style/corner" />
+
 
             <TextView
                 android:id="@+id/memberName"
@@ -36,7 +38,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="24dp"
                 android:layout_marginEnd="16dp"
                 android:layout_toEndOf="@id/About_imgMain"
                 android:text="ALi Mohamed"
@@ -56,7 +58,7 @@
                 android:layout_below="@+id/memberName"
                 android:layout_alignParentEnd="true"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="24dp"
                 android:layout_marginEnd="17dp"
                 android:layout_marginBottom="16dp"
                 android:layout_toEndOf="@id/About_imgMain"
@@ -76,7 +78,7 @@
                 android:layout_alignParentEnd="true"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
-                android:layout_marginBottom="16dp"
+                android:layout_marginBottom="24dp"
                 android:layout_toEndOf="@id/About_imgMain"
                 android:text="github account"
                 android:textSize="19sp"
