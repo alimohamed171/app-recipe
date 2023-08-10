@@ -84,6 +84,18 @@ class MainActivity2 : AppCompatActivity() {
         }
     }
 
+    override fun onBackPressed() {
+        if(navController.currentDestination?.id == R.id.homeFragment)
+        {
+            finishAffinity()
+        }
+        else
+        {
+            super.onBackPressed()
+        }
+
+    }
+
     private fun setToolBar() {
         setSupportActionBar(toolbar)
     }
