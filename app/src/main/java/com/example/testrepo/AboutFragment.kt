@@ -19,10 +19,10 @@ class AboutFragment : Fragment() {
   val team : List<TeamData> = arrayListOf(
 TeamData("Ali Mohamed","https://www.linkedin.com/in/ali-mohamed-3539a2234","https://linkedin.com/ali-mohamed","https://github.com/alimohamed171",R.drawable.chef),
 TeamData("Mohamed Maged","https://www.linkedin.com/in/mohamed-maged-4a3b761b5","https://linkedin.com/mohamed-maged","https://github.com/Ibn-Maged",R.drawable.coding),
-TeamData("Sara Almohands","https://www.linkedin.com/in/mohamed-maged-4a3b761b5","https://www.linkedin.com/in/sara-osama-almohands/","https://github.com/Sara-Almohands",R.drawable.girl_chef),
+TeamData("Sara Almohands","https://www.linkedin.com/in/sara-osama-almohands/","https://www.linkedin.com/in/sara-osama-almohands/","https://github.com/Sara-Almohands",R.drawable.girl_chef),
 TeamData("Ali Mohamed","https://www.linkedin.com/in/ali-mohamed-3539a2234","https://linkedin.com/ali-mohamed","https://github.com/alimohamed171",R.drawable.hamburger),
 TeamData("Mohamed Maged","https://www.linkedin.com/in/mohamed-maged-4a3b761b5","https://linkedin.com/mohamed-maged","https://github.com/Ibn-Maged",R.drawable.pizza),
-TeamData("Sara Almohands","https://www.linkedin.com/in/mohamed-maged-4a3b761b5","https://www.linkedin.com/in/sara-osama-almohands/","https://github.com/Sara-Almohands",R.drawable.shawarma),
+TeamData("Sara Almohands","https://www.linkedin.com/in/sara-osama-almohands/","https://www.linkedin.com/in/sara-osama-almohands/","https://github.com/Sara-Almohands",R.drawable.shawarma),
   )
 
     override fun onCreateView(
