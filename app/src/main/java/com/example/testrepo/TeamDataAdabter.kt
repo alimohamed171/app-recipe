@@ -27,8 +27,8 @@ class TeamDataAdabter(private val items: List<TeamData>) : RecyclerView.Adapter<
         holder.image.setImageResource(currentItem.image)
         holder.userName.text = currentItem.name
         holder.userLinkedin.text = currentItem.txtlinkedin
-        holder.userGithub.text = currentItem.github
-        holder.bindLinkListener(link1 = currentItem.linkedin, link2 = holder.userGithub.text.toString())
+        holder.userGithub.text = currentItem.txtgithub
+        holder.bindLinkListener(link1 = currentItem.linkedin, link2 = currentItem.github)
 
 
     }
