@@ -1,6 +1,7 @@
 package com.example.testrepo
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -28,6 +29,7 @@ class DetailFragment : Fragment() {
     private val args: DetailFragmentArgs by navArgs()
     private lateinit var checkBox: CheckBox
     private var mealViewModel: MealViewModel? = null
+    private var checkBoxFlag = false
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -56,13 +58,20 @@ class DetailFragment : Fragment() {
         checkBox.setOnCheckedChangeListener { _, isChecked ->
             if(isChecked)
             {
-                mealViewModel?.insertMeal(args.mealId, args.name)
-                mealViewModel?.addToFavorites(args.mealId, SharedPrefs.getCurrentUser())
-            }
+                if(!checkBoxFlag)
+                {
+                    mealViewModel?.insertMeal(args.mealId, args.name)
+                    mealViewModel?.addToFavorites(args.mealId, SharedPrefs.getCurrentUser())
+                }
+                else
+                {
+                    checkBoxFlag = false
+                }
+             }
             else
             {
                 showAlertDialog()
-            }
+             }
         }
     }
 
@@ -123,6 +132,7 @@ class DetailFragment : Fragment() {
                 dialog.dismiss()
             }
             .setNegativeButton("No"){ dialog, which ->
+                checkBoxFlag = true
                 checkBox.isChecked = true
                 dialog.dismiss()
             }
