@@ -29,7 +29,7 @@ class MainActivity2 : AppCompatActivity() {
         setToolBar()
         NavigationUI.setupActionBarWithNavController(this, navController)
         NavigationUI.setupWithNavController(bottomNav, navController)
-
+        NavigationUI.setupWithNavController(toolbar, navController)
         barsVisibility()
     }
 
